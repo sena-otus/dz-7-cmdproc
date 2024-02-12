@@ -1,4 +1,4 @@
-# dz-6-matrix
-Exercise 6. sparse matrix
+# dz-7-cmdproc
+Exercise 7. command processor
 
-Doxygen docu see [here](https://sena-otus.github.io/dz-6-matrix/index.html)
+Doxygen docu see [here](https://sena-otus.github.io/dz-7-cmdproc/index.html)
