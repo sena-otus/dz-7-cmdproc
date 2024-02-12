@@ -3,6 +3,15 @@
 
 const int parsing_errorcode = 101;
 
+void printBlock(std::string &blockoutput)
+{
+  if(!blockoutput.empty())
+  {
+    std::cout << "bulk: "  << blockoutput << "\n";
+    blockoutput.clear();
+  }
+}
+
   // NOLINTBEGIN(cppcoreguidelines-avoid-magic-numbers,readability-magic-numbers)
   // NOLINTNEXTLINE(hicpp-named-parameter,readability-named-parameter)
 int main(int argc, char const *argv[] )
@@ -43,11 +52,7 @@ int main(int argc, char const *argv[] )
         {
           continue;
         }
-        if(!blockoutput.empty())
-        {
-          std::cout << "bulk: "  << blockoutput << "\n";
-          blockoutput.clear();
-        }
+        printBlock(blockoutput);
         cmdnum = 0;
         continue;
       }
@@ -63,11 +68,7 @@ int main(int argc, char const *argv[] )
         {
           throw std::runtime_error("нарушен баланс скобок");
         }
-        if(!blockoutput.empty())
-        {
-          std::cout << "bulk: "  << blockoutput << "\n";
-          blockoutput.clear();
-        }
+        printBlock(blockoutput);
         cmdnum = 0;
         continue;
       }
@@ -78,21 +79,17 @@ int main(int argc, char const *argv[] )
         cmdnum++;
       }
       if(cmdnum == N && extendedModeLevel == 0) {
-        std::cout << "bulk: "  << blockoutput << "\n";
-        blockoutput.clear();
+        printBlock(blockoutput);
         cmdnum = 0;
       }
     }
     catch(const std::exception &e)
     {
-      std::cerr << "Error in line " << lineno << ": " << e.what() << std::endl;
+      std::cerr << "Ошибка в строке " << lineno << ": " << e.what() << std::endl;
       return parsing_errorcode;
     }
   }
-  if(!blockoutput.empty())
-  {
-    std::cout << "bulk: "  << blockoutput << "\n";
-  }
+  printBlock(blockoutput);
   return 0;
 }
   // NOLINTEND(cppcoreguidelines-avoid-magic-numbers,readability-magic-numbers)
