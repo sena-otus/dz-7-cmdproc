@@ -1,4 +1,5 @@
 #include <iostream>
+#include <stdexcept>
 
 const int parsing_errorcode = 101;
 
@@ -31,19 +32,52 @@ int main(int argc, char const *argv[] )
   int lineno{0};
   int cmdnum{0};
   std::string blockoutput;
+  int extendedModeLevel{0};
   for(std::string line; std::getline(std::cin, line);++lineno)
   {
     try {
       if(line == "{")
       {
+        extendedModeLevel++;
+        if(extendedModeLevel > 1)
+        {
+          continue;
+        }
+        if(!blockoutput.empty())
+        {
+          std::cout << "bulk: "  << blockoutput << "\n";
+          blockoutput.clear();
+        }
+        cmdnum = 0;
+        continue;
       }
 
-      if(cmdnum < N)
+      if(line == "}")
+      {
+        extendedModeLevel--;
+        if(extendedModeLevel > 0)
+        {
+          continue;
+        }
+        if(extendedModeLevel < 0)
+        {
+          throw std::runtime_error("нарушен баланс скобок");
+        }
+        if(!blockoutput.empty())
+        {
+          std::cout << "bulk: "  << blockoutput << "\n";
+          blockoutput.clear();
+        }
+        cmdnum = 0;
+        continue;
+      }
+
+      if(cmdnum < N || extendedModeLevel > 0)
       {
         blockoutput += (cmdnum == 0) ? line : (", " + line);
         cmdnum++;
       }
-      if(cmdnum == N) {
+      if(cmdnum == N && extendedModeLevel == 0) {
         std::cout << "bulk: "  << blockoutput << "\n";
         blockoutput.clear();
         cmdnum = 0;
@@ -55,8 +89,10 @@ int main(int argc, char const *argv[] )
       return parsing_errorcode;
     }
   }
-  if(!blockoutput.empty()) std::cout << "bulk: "  << blockoutput << "\n";
-
+  if(!blockoutput.empty())
+  {
+    std::cout << "bulk: "  << blockoutput << "\n";
+  }
   return 0;
 }
   // NOLINTEND(cppcoreguidelines-avoid-magic-numbers,readability-magic-numbers)
