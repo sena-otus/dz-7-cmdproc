@@ -23,7 +23,7 @@ void Block::parseLine(const std::string& line)
   {
     m_extendedModeLevel--;
     if(m_extendedModeLevel > 0) return;
-    if(m_extendedModeLevel < 0) throw std::runtime_error("нарушен баланс скобок в строке " + std::to_string(m_lineno));
+    if(m_extendedModeLevel < 0) throw std::runtime_error("лишняя скобка } в строке " + std::to_string(m_lineno));
     flush();
     return;
   }
