@@ -21,7 +21,7 @@ endif()
 
 configure_file(version.h.in version.h)
 
-add_executable(bulk main.cpp)
+add_executable(bulk main.cpp block.cpp)
 
 target_link_libraries(bulk PRIVATE Boost::boost)
 
