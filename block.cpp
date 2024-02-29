@@ -16,7 +16,7 @@ void Block::parseLine(const std::string& line)
   {
     m_extendedModeLevel++;
     if(m_extendedModeLevel > 1) return;
-    print();
+    flush();
     return;
   }
   if(line == "}")
@@ -24,11 +24,11 @@ void Block::parseLine(const std::string& line)
     m_extendedModeLevel--;
     if(m_extendedModeLevel > 0) return;
     if(m_extendedModeLevel < 0) throw std::runtime_error("нарушен баланс скобок в строке " + std::to_string(m_lineno));
-    print();
+    flush();
     return;
   }
   if(m_cmdnum < m_N || m_extendedModeLevel > 0) append(line);
-  if(m_cmdnum == m_N && m_extendedModeLevel == 0) print();
+  if(m_cmdnum == m_N && m_extendedModeLevel == 0) flush();
 }
 
 
@@ -52,7 +52,7 @@ void Block::append(const std::string &line)
 }
 
 
-void Block::print()
+void Block::flush()
 {
   namespace fs = std::filesystem;
   if(m_cmdnum > 0) {
@@ -76,6 +76,6 @@ void Block::finalize()
 {
   if(m_extendedModeLevel==0)
   {
-    print();
+    flush();
   }
 }

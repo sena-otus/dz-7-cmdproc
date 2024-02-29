@@ -9,7 +9,7 @@ public:
 
   void parseLine(const std::string& line);
   void append(const std::string &line);
-  void print();
+  void flush();
   void finalize();
 private:
   std::string m_str;
