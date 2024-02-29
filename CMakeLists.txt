@@ -4,7 +4,7 @@ set(PATCH_VERSION "1" CACHE INTERNAL "Patch version")
 set(PROJECT_VERSION 0.0.${PATCH_VERSION})
 
 # underscores are not allowed in deb package name, but adding underscore to comply with requirements...
-project(cmdproc VERSION ${PROJECT_VERSION})
+project(bulk VERSION ${PROJECT_VERSION})
 
 option(WITH_TEST "Whether to build Google test" ON)
 option(WITH_CLANG_TIDY "use clang-tidy" OFF)
@@ -21,16 +21,16 @@ endif()
 
 configure_file(version.h.in version.h)
 
-add_executable(cmdproc main.cpp)
+add_executable(bulk main.cpp)
 
-target_link_libraries(cmdproc PRIVATE Boost::boost)
+target_link_libraries(bulk PRIVATE Boost::boost)
 
-set_target_properties(cmdproc PROPERTIES
+set_target_properties(bulk PROPERTIES
     CXX_STANDARD 20
     CXX_STANDARD_REQUIRED ON
 )
 
-target_include_directories(cmdproc
+target_include_directories(bulk
     PRIVATE "${CMAKE_BINARY_DIR}"
   )
 
@@ -38,20 +38,20 @@ if(WITH_TEST)
     find_package(GTest REQUIRED)
     enable_testing()
 
-    add_executable(gtest_cmdproc gtest_cmdproc.cpp)
+    add_executable(gtest_bulk gtest_bulk.cpp)
 
-    set_target_properties(gtest_cmdproc PROPERTIES
+    set_target_properties(gtest_bulk PROPERTIES
         CXX_STANDARD 20
         CXX_STANDARD_REQUIRED ON
     )
 
-    target_link_libraries(gtest_cmdproc
+    target_link_libraries(gtest_bulk
       PRIVATE
       GTest::gtest_main
       Boost::boost
     )
 
-    gtest_discover_tests(gtest_cmdproc)
+    gtest_discover_tests(gtest_bulk)
 endif()
 
 
@@ -61,7 +61,7 @@ if (MSVC)
     set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} --all-warnings -Wall -Werror -Wextra -pedantic")
 endif()
 
-install(TARGETS cmdproc RUNTIME DESTINATION bin)
+install(TARGETS bulk RUNTIME DESTINATION bin)
 
 set(CPACK_GENERATOR DEB)
 set(CPACK_PACKAGE_VERSION_MAJOR "${PROJECT_VERSION_MAJOR}")
