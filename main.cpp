@@ -5,8 +5,6 @@
 
 const int generic_errorcode = 101;
 
-
-
 int main(int argc, char const *argv[] )
 {
   try {

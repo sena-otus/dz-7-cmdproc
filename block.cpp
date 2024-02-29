@@ -8,6 +8,10 @@
 #include <boost/format.hpp>
 
 
+Block::Block(unsigned N, std::function<time_t()> getTime)
+  : m_N(N), m_getTime(std::move(getTime))
+{}
+
 
 void Block::parseLine(const std::string& line)
 {
@@ -36,7 +40,7 @@ void Block::append(const std::string &line)
 {
   if(m_cmdnum == 0) {
     m_str = line;
-    const time_t newts = std::time(nullptr);
+    const time_t newts = m_getTime();
     if(newts == m_timestamp) { // same timestamp like in previous file
       suffix++; // add suffix
     }

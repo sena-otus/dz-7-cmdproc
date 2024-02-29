@@ -38,7 +38,7 @@ if(WITH_TEST)
     find_package(GTest REQUIRED)
     enable_testing()
 
-    add_executable(gtest_bulk gtest_bulk.cpp)
+    add_executable(gtest_bulk gtest_bulk.cpp block.cpp)
 
     set_target_properties(gtest_bulk PROPERTIES
         CXX_STANDARD 20
@@ -54,6 +54,10 @@ if(WITH_TEST)
     gtest_discover_tests(gtest_bulk)
 endif()
 
+configure_file(testinput1.txt . COPYONLY)
+configure_file(testinput2.txt . COPYONLY)
+configure_file(testoutput1.txt . COPYONLY)
+configure_file(testoutput2.txt . COPYONLY)
 
 if (MSVC)
     set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} /W4")
