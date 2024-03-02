@@ -11,9 +11,9 @@ void Block::append(const std::string &line) {
     m_str = line;
     const time_t newts = m_getTime();
     if (newts == m_timestamp) { // same timestamp like in previous file
-      suffix++;                 // add suffix
+      m_suffix++;                 // add suffix
     } else {                    // no suffix
-      suffix = 0;
+      m_suffix = 0;
     }
     m_timestamp = newts;
   } else {
@@ -27,7 +27,7 @@ void Block::append(const std::string &line) {
 void Block::flush() {
   if (m_cmdnum > 0) {
     std::for_each(m_wlist.begin(), m_wlist.end(),
-                  [&](writer_t &f){f(m_str, m_timestamp, suffix);});
+                  [&](writer_t &f){f(m_str, m_timestamp, m_suffix);});
     m_cmdnum = 0;
   }
 }

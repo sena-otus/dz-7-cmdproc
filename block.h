@@ -43,8 +43,9 @@ public:
 
 private:
   wlist_t m_wlist; //!< список функций для вывода блока команд
-  unsigned m_cmdnum{0};
-  time_t m_timestamp{0};
-  int suffix{0};
+  std::string m_str; //!< буфер для накопления команд
+  unsigned m_cmdnum{0}; //!< количество накопленных команд
+  time_t m_timestamp{0}; //!< временная метка
+  int m_suffix{0}; //!< количество блоков одинаковой временной меткой
   std::function<time_t()> m_getTime;
 };
