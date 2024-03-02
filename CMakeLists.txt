@@ -21,7 +21,7 @@ endif()
 
 configure_file(version.h.in version.h)
 
-add_executable(bulk main.cpp block.cpp)
+add_executable(bulk main.cpp block.cpp parser.cpp stdoutwriter.cpp filewriter.cpp)
 
 target_link_libraries(bulk PRIVATE Boost::boost)
 
@@ -38,7 +38,7 @@ if(WITH_TEST)
     find_package(GTest REQUIRED)
     enable_testing()
 
-    add_executable(gtest_bulk gtest_bulk.cpp block.cpp)
+    add_executable(gtest_bulk gtest_bulk.cpp block.cpp parser.cpp stdoutwriter.cpp filewriter.cpp)
 
     set_target_properties(gtest_bulk PROPERTIES
         CXX_STANDARD 20

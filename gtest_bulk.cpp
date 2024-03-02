@@ -5,6 +5,9 @@
  *  */
 
 #include "block.h"
+#include "parser.h"
+#include "stdoutwriter.h"
+#include "filewriter.h"
 #include <gtest/gtest.h>
 #include <fstream>
 #include <filesystem>
@@ -18,14 +21,15 @@ namespace {
   std::string get_is(const std::string &path_in, time_t t)
   {
     testing::internal::CaptureStdout();
-    Block block(3, [&t](){ return t++;});
+    Block block({stdoutwriter, filewriter}, [&t](){ return t++;});
+    Parser parser(3, block);
     std::ifstream ifsin(path_in);
     EXPECT_TRUE(ifsin.is_open());
     for(std::string line; std::getline(ifsin, line);) {
-      block.parseLine(line);
+      parser.parse(line);
     }
     EXPECT_FALSE(ifsin.bad());
-    block.finalize();
+    parser.finalize();
     return testing::internal::GetCapturedStdout();
   }
 

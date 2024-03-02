@@ -1,4 +1,7 @@
 #include "block.h"
+#include "parser.h"
+#include "stdoutwriter.h"
+#include "filewriter.h"
 #include <iostream>
 #include <stdexcept>
 
@@ -23,11 +26,12 @@ int main(int argc, char const *argv[] )
       throw std::runtime_error("Единственный аргумент командной строки дожен быть положительным числом");
     }
 
-    Block block(N);
+    Block block({stdoutwriter, filewriter});
+    Parser parser(N, block);
     for(std::string line; std::getline(std::cin, line);) {
-      block.parseLine(line);
+      parser.parse(line);
     }
-    block.finalize();
+    parser.finalize();
     return 0;
   }
   catch(const std::exception &e)
