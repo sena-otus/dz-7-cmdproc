@@ -6,19 +6,19 @@
 #include <ctime>
 
 /**
- *  Block накапливает команды во внутреннем буфере
+ * @brief Block накапливает команды во внутреннем буфере
  *  */
 class Block : public AbstractBlock
 {
 public:
-    /** тип указатель на функцию для вывода блока команд */
+    /** @brief тип указатель на функцию для вывода блока команд */
   using writer_t = void (*)(const std::string &, time_t, int);
 
-    /** тип список функций для вывода блока команд */
+    /** @brief тип список функций для вывода блока команд */
   using wlist_t = std::list<writer_t>;
 
     /**
-     * Конструктор блока
+     * @brief Конструктор блока
      * @param wlist список функций для вывода готовых блоков
      * @param getTime функция для получения времени в секундах,
      *   по умолчанию time(0), тест передаёт фиксированное число для воспроизводимости
@@ -28,7 +28,7 @@ public:
     std::function<time_t()> getTime = [](){ return std::time(nullptr);});
 
     /**
-     * Добавить строку в буфер
+     * @brief Добавить строку в буфер
      * @param line строка для обновления
      * */
   void append(const std::string &line) override;
