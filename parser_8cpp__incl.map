@@ -1,0 +1,12 @@
+<map id="parser.cpp" name="parser.cpp">
+<area shape="rect" id="Node000001" title=" " alt="" coords="113,5,194,31"/>
+<area shape="rect" id="Node000002" href="$parser_8h.html" title=" " alt="" coords="72,79,139,105"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="148,33,124,67,120,64,143,30"/>
+<area shape="rect" id="Node000005" title=" " alt="" coords="163,79,240,105"/>
+<area shape="poly" id="edge5_Node000001_Node000005" title=" " alt="" coords="163,30,187,64,182,67,159,33"/>
+<area shape="rect" id="Node000003" href="$abstractblock_8h.html" title=" " alt="" coords="5,153,115,178"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="100,106,78,141,73,138,96,103"/>
+<area shape="rect" id="Node000004" title=" " alt="" coords="79,226,132,252"/>
+<area shape="poly" id="edge4_Node000002_Node000004" title=" " alt="" coords="114,104,126,137,130,158,129,179,119,213,114,211,124,178,125,158,121,139,109,106"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="70,177,92,212,87,215,65,180"/>
+</map>
